@@ -8,13 +8,24 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li>
-                            <a th:href="@{/}"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                            <a th:href="@{/}"><i class="fa fa-dashboard fa-fw"></i> Menu</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Cadastros<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/contatos}">Contatos</a>
+                                </li>
+                                 <li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/contatos}">Agendamentos</a>
+                                </li>
+                                
+                                <li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/contatos}">Pacientes</a>
+                                </li>
+                                
+                                <li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/contatos}">Usuários</a>
                                 </li>
                                 <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/outros/morris}">Morris</a>
