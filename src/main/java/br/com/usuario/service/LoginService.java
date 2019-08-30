@@ -1,7 +1,7 @@
 /**
  * 
  */
-package br.com.service;
+package br.com.usuario.service;
 
 import org.springframework.stereotype.Service;
 
