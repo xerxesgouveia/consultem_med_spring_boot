@@ -16,6 +16,7 @@ public abstract class ServicoGenerico<T,ID extends Serializable> {
 	
 	@Transactional
 	public void salvar(final T entidade) {
+		System.out.println();
 		this.repository.save(entidade);
 	}
 	
