@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.usuario.service.LoginService;
+import br.com.usuario.service.UsuarioService;
 import lombok.Data;
 
 @Controller
@@ -16,10 +16,10 @@ public class LoginController {
 
 	private static final String PAGES_LOGIN = "pages/login";
 	
-	private LoginService service;
+	private UsuarioService service;
 
 	@Autowired
-	public LoginController(LoginService service) {
+	public LoginController(UsuarioService service) {
 		this.service = service;
 	}
 	

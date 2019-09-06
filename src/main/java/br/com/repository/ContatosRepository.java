@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.com.model.Contato;
+import br.com.model.Funcionario;
 
-public interface ContatosRepository extends JpaRepository<Contato, Long> {
-
+public interface ContatosRepository extends JpaRepository<Funcionario, Long> {
 	
-	public List<Contato> findByNomeContaining(String nome);
+	public List<Funcionario> findByNomeContaining(String nome);
 }

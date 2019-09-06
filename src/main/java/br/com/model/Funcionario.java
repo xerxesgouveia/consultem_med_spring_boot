@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name="contatos")
-public class Contato implements Serializable {
+public class Funcionario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	

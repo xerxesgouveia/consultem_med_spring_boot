@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.thymeleaf.util.StringUtils;
 
-import br.com.model.Contato;
+import br.com.model.Funcionario;
 import br.com.model.dto.ContatoPesquisaDTO;
 import br.com.service.ContatoService;
 
@@ -37,7 +37,7 @@ public class ContatosController {
 		ModelAndView mv = new ModelAndView(PAGES_CONTATO_CONTATOS);		
 		
 		if(!StringUtils.isEmpty(filtro.getNome())) {
-			List<Contato> contatos = this.service.filtrar(filtro);
+			List<Funcionario> contatos = this.service.filtrar(filtro);
 			mv.addObject("contatos", contatos);
 			
 		}else {
@@ -57,12 +57,12 @@ public class ContatosController {
 	
 	@GetMapping("/edit/{id}")
 	public ModelAndView edit(@PathVariable("id") Long id) {
-		Contato contato = this.service.getById(id); 
+		Funcionario contato = this.service.getById(id); 
 		return novo(contato);
 	}
 	
 	@GetMapping("/novo")
-	public ModelAndView novo(Contato contato) {
+	public ModelAndView novo(Funcionario contato) {
 		ModelAndView mv = new ModelAndView(PAGES_CONTATO_NOVO_CONTATO);
 		mv.addObject("contato", contato);
 		return mv;
@@ -81,7 +81,7 @@ public class ContatosController {
 	}
 	
 	@PostMapping("/save")
-	public ModelAndView salvar(@Valid Contato contato, BindingResult result, Model model, RedirectAttributes attributes){
+	public ModelAndView salvar(@Valid Funcionario contato, BindingResult result, Model model, RedirectAttributes attributes){
 		ModelAndView mv = new ModelAndView("redirect:/contatos");
 		
 		if (result.hasErrors()) {
