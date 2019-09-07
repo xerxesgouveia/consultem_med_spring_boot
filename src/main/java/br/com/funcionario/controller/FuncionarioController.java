@@ -24,9 +24,9 @@ import br.com.funcionario.service.FuncionarioService;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-	private static final String PAGES_NOVO_FUNCIONARIO = "pages/contato/novo_contato";
+	private static final String PAGES_NOVO_FUNCIONARIO = "pages/funcionario/novo_funcionario";
 
-	private static final String PAGES_CONTATO_LISTAGEM = "pages/contato/contatos";
+	private static final String PAGES_CONTATO_LISTAGEM = "pages/funcionario/funcionario";
 
 	@Autowired
 	private FuncionarioService funcionarioService;
@@ -74,9 +74,10 @@ public class FuncionarioController {
     	
     	if (!funcionarioComemailExistente.isPresent()) {
     		attributes.addFlashAttribute("mensagem", "Este email já existe");
-
+    		
+		}else {
+			attributes.addFlashAttribute("mensagem", "Funcionario salvo com sucesso");			
 		}
-		attributes.addFlashAttribute("mensagem", "Funcionario salvo com sucesso");
 		return mv;
-	}
+	}	
 }

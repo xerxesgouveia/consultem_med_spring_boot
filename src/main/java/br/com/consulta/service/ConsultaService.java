@@ -1,5 +1,8 @@
 package br.com.consulta.service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,5 +23,21 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 		return this.consultaRepository;
 	}
 	
-	
+	@Override
+	public void salvar(Consulta consulta) {
+		
+		final LocalDate dataAgendamento = consulta.getAgendamento().getDataAgendamento();
+		final LocalTime horaAgendamento = consulta.getAgendamento().getHoraAgendamento();
+		final Long idMedico = consulta.getMedico().getId();
+		
+		final boolean existeConsultaComdata = this.consultaRepository.existeConsultaComHoraEData(dataAgendamento,
+				horaAgendamento, idMedico);
+		
+		
+		if (existeConsultaComdata) {
+			return ;
+		}
+		
+		this.salvar(consulta);
+	}
 }

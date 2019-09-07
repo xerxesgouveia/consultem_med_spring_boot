@@ -30,10 +30,10 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	
-	@Column(name = "LOGIN")
+	@Column()
 	private String login;
 	
-	@Column(name = "SENHA")
+	@Column()
 	private String senha;
 	
 //	@Enumerated(EnumType.STRING)
