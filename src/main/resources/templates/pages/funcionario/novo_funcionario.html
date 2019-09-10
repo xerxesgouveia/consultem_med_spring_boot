@@ -20,6 +20,10 @@
             <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
             <span th:text="${mensagem}"></span>
         </div>
+        <div class="alert alert-danger" th:if="${not #strings.isEmpty(mensagemErro)}">
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span></button>
+            <span th:text="${mensagemErro}"></span>
+        </div>
 
         <form th:object="${funcionario}" th:action="@{/funcionario/save}" method="POST" role="form">
 
@@ -56,6 +60,7 @@
 			<label>Login sistema</label> 
 			<input class="form-control" type="text" name="login"  th:field="*{pessoa.usuario.login}"/>
         </div>
+        <input id="id" type="hidden" class="form-control" th:field="*{pessoa.usuario.id}" />
         
         <div class="form-group" th:classappend="${#fields.hasErrors('pessoa.usuario.senha')}? 'has-error'">
             <label>Senha</label> 

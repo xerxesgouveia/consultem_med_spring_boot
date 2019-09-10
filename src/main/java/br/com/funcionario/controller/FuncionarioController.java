@@ -78,7 +78,7 @@ public class FuncionarioController {
     		attributes.addFlashAttribute("mensagem", "Funcionario salvo com sucesso");
     		return mv;
 		}
-		attributes.addFlashAttribute("mensagem", mensagemusuario);
+		attributes.addFlashAttribute("mensagemErro", mensagemusuario);
 
 		return new ModelAndView("redirect:/funcionario/novo");
 	}

@@ -38,7 +38,7 @@ public class UsuarioService extends ServicoGenerico<Usuario, Long> {
 		final boolean existeLogin = this.usuarioRepository.verificarExistenciaLogin(usuario.getLogin(), loginAntigo);
 		
 		if (existeLogin) {
-			return "usuário já existe com login este login cadastrado";
+			return "usuário já existe com este login cadastrado";
 		}
 		
 		return "";
