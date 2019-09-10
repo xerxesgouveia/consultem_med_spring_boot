@@ -19,9 +19,9 @@
                                  <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/contatos}">Agendamentos</a>
                                 </li>
-                                
-                                <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Pacientes</a>
+                                <!-- sec:authorize="hasAuthority('ADMIN')" -->
+                                <li >
+                                    <a th:href="@{/funcionario}">Funcionarios</a>
                                 </li>
                                 
                                 <li sec:authorize="hasAuthority('ADMIN')">

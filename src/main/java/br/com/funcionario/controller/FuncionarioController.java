@@ -1,5 +1,6 @@
 package br.com.funcionario.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.funcionario.Funcionario;
+import br.com.funcionario.dto.FuncionarioFiltroBuscaDto;
 import br.com.funcionario.service.FuncionarioService;
 
 
@@ -24,25 +26,25 @@ import br.com.funcionario.service.FuncionarioService;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-	private static final String PAGES_NOVO_FUNCIONARIO = "pages/contato/novo_contato";
+	private static final String PAGES_NOVO_FUNCIONARIO = "pages/funcionario/novo_funcionario";
 
-	private static final String PAGES_CONTATO_LISTAGEM = "pages/contato/contatos";
+	private static final String PAGES_CONTATO_LISTAGEM = "pages/funcionario/funcionarios";
 
 	@Autowired
 	private FuncionarioService funcionarioService;
 
 	@GetMapping
-	public ModelAndView listar(@ModelAttribute("filtro") Funcionario funcionario) {
+	public ModelAndView listar(@ModelAttribute("filtro") FuncionarioFiltroBuscaDto filtro) {
 		ModelAndView mv = new ModelAndView(PAGES_CONTATO_LISTAGEM);
+		Optional<List<Funcionario>> funcionarios = this.funcionarioService.filtroListagem(filtro.getNome());
+		mv.addObject("funcionarios",funcionarios.get());
 
-		mv.addObject("funcionarios", funcionarioService.filtroListagem(funcionario.getPessoa().getNome()));
-
-		return mv;
+		return mv; 
 	}
 
 	@GetMapping("/delete/{id}")
 	public ModelAndView excluir(@PathVariable Long id, RedirectAttributes attributes) {
-		ModelAndView mv = new ModelAndView("redirect:/funcionarios");
+		ModelAndView mv = new ModelAndView("redirect:/funcionario");
 		this.funcionarioService.remover(id);
 		attributes.addFlashAttribute("removido", "Funcionario removido com sucesso!");
 		return mv;
@@ -62,21 +64,22 @@ public class FuncionarioController {
 	}
 
 	@PostMapping("/save")
-	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result,
+	public ModelAndView salvar(@Valid Funcionario funcionario, Model model, BindingResult result,
 			RedirectAttributes attributes) {
-		ModelAndView mv = new ModelAndView("redirect:/funcionarios");
+		ModelAndView mv = new ModelAndView("redirect:/funcionario");
 
 		if (result.hasErrors()) {
 			return novo(funcionario);
 		}
-		
-    	Optional<Funcionario> funcionarioComemailExistente =  this.funcionarioService.salvarFuncionario(funcionario);
+		//Caso exista um usuário com mesmo login, uma mensagem é enviada para a view
+    	final String mensagemusuario=  this.funcionarioService.salvarFuncionario(funcionario);
     	
-    	if (!funcionarioComemailExistente.isPresent()) {
-    		attributes.addFlashAttribute("mensagem", "Este email já existe");
-
+    	if (mensagemusuario.equals("")) {
+    		attributes.addFlashAttribute("mensagem", "Funcionario salvo com sucesso");
+    		return mv;
 		}
-		attributes.addFlashAttribute("mensagem", "Funcionario salvo com sucesso");
-		return mv;
+		attributes.addFlashAttribute("mensagem", mensagemusuario);
+
+		return new ModelAndView("redirect:/funcionario/novo");
 	}
 }

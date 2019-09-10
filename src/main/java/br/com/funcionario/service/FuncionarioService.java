@@ -34,24 +34,27 @@ public class FuncionarioService extends ServicoGenerico<Funcionario, Long> {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Funcionario> filtroListagem(final String filtro) {
+	public Optional<List<Funcionario>> filtroListagem(final String filtro) {
 
 		if (!StringUtils.isEmpty(filtro)) {
-			List<Funcionario> funcionarios = this.funcionarioRepository.findByPessoaNomeContaining(filtro);
-			return funcionarios;
+			List<Funcionario> funcionariosFiltrados = this.funcionarioRepository.findByPessoaNomeContaining(filtro);
+			return Optional.ofNullable(funcionariosFiltrados);
 		}
-		return super.listar();
+		List<Funcionario>  funcionarios = this.funcionarioRepository.findAll();
+		
+		return Optional.ofNullable(funcionarios);
 
 	}
 
 	@Transactional
-	public Optional<Funcionario> salvarFuncionario(Funcionario funcionario) {
-		Usuario usuario = this.usuarioService.prepararParaPersistir(funcionario.getPessoa().getUsuario());
+	public String salvarFuncionario(Funcionario funcionario) {
+		String mensagemUsuario = this.usuarioService.prepararParaPersistir(funcionario.getPessoa().getUsuario());
 		
-		if (Optional.ofNullable(usuario).isPresent()) {
-			return Optional.of(this.funcionarioRepository.save(funcionario));
+		if (mensagemUsuario.equals("")) {
+			this.funcionarioRepository.save(funcionario);
+			return "";
 		}
 		
-		return null;
+		return mensagemUsuario;
 	}
 }

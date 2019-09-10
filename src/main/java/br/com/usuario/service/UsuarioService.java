@@ -24,7 +24,7 @@ public class UsuarioService extends ServicoGenerico<Usuario, Long> {
 	}
 	
 	@Transactional
-	public Usuario prepararParaPersistir(final Usuario usuario) {
+	public String prepararParaPersistir(final Usuario usuario) {
 
 		String loginAntigo = "";
 		
@@ -38,10 +38,10 @@ public class UsuarioService extends ServicoGenerico<Usuario, Long> {
 		final boolean existeLogin = this.usuarioRepository.verificarExistenciaLogin(usuario.getLogin(), loginAntigo);
 		
 		if (existeLogin) {
-			return null;
+			return "usuário já existe com login este login cadastrado";
 		}
 		
-		return usuario;
+		return "";
 	}
 
 	@Override
