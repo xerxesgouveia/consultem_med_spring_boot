@@ -8,14 +8,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.Length;
 
 import br.com.usuario.Pessoa;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * @author ricardo belo
+ *
+ */
+
 @Entity
-@Table
 @EqualsAndHashCode
 @Data
 public class Paciente implements Serializable {
@@ -25,9 +30,11 @@ public class Paciente implements Serializable {
 	private Long id;
 	
 	@Column
+	@Length(min=3, max=20, message="O prontuario não pode ser vazio")
 	private String prontuario;
 	
 	@Embedded
 	private Pessoa pessoa;
 
 }
+
