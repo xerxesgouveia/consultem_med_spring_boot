@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.agendamento.service.AgendamentoService;
 import br.com.consulta.Consulta;
 import br.com.consulta.dto.FiltroDataDto;
 import br.com.consulta.service.ConsultaService;
@@ -40,8 +41,20 @@ public class ConsultaController {
 	
 	@Autowired
 	private PacienteService pacienteService;
+	
+	@Autowired
+	private AgendamentoService agendamentoService;
 
-	@GetMapping
+	@GetMapping("/cancelarAgendamento/{id}")
+	public ModelAndView cancelarConsulta(@PathVariable Long id, RedirectAttributes attributes ) {
+		ModelAndView mv = new ModelAndView(PAGES_CONSULTA_LISTAGEM);
+		final String mensagemCancelamento = this.agendamentoService.cancelarAgendamento(id);
+		mv.addObject("mensagem",mensagemCancelamento);
+
+		return listar(new FiltroDataDto());
+	}
+	
+	@GetMapping()
 	public ModelAndView listar(@ModelAttribute("filtro") FiltroDataDto filtro) {
 		ModelAndView mv = new ModelAndView(PAGES_CONSULTA_LISTAGEM);
 		Optional<List<Consulta>> consultas = this.consultaService.filtroListagem(filtro.getDataAgendamento());

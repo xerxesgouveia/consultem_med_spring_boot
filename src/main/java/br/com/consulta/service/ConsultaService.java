@@ -79,5 +79,21 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 		this.salvar(consulta);
 		return "";
 	}
+	
+	@Transactional
+	public String cancelarAgendamento(final Long id) {
+		// TODO Auto-generated method stub
+		final Consulta consultaFromDB = this.buscarPorId(id);
+		
+		if (consultaFromDB == null) {
+			return "";
+		}
+		
+		consultaFromDB.getAgendamento().setStatus(StatusAgendamento.CANCELADO);
+		
+		this.salvar(consultaFromDB);
+		
+		return "Consulta cancelada";
+	}
 
 }

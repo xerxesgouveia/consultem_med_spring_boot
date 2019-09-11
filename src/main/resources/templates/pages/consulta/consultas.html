@@ -53,24 +53,26 @@ layout:decorator="layoutPadrao">
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>Descricao</th>
+					<th>Status</th>
                     <th>Médico</th>
-<!--                     <th>Paciente</th>
- -->                    <th>Data de agendamento</th>
+                    <th>Paciente</th>
+	                 <th>Data de agendamento</th>
                     <th>hora do agendamento</th>
                     <th class="th-acoes">Ações</th>
                 </tr>
             </thead>
             <tbody >
                   <tr th:each="c: ${consultas}">  
-                    <td th:text="${c.descricao}"></td>
+					<td th:text="${c.agendamento.status}"></td>
                     <td th:text="${c.medico.pessoa.nome}"></td>
-<!--                     <td th:text="${c.agendamento.paciente.pessoa.nome}"></td>
- -->                    <td th:text="${c.agendamento.dataAgendamento}"></td>
+                     <td th:text="${c.agendamento.paciente.pessoa.nome}"></td>
+                     <td th:text="${c.agendamento.dataAgendamento}"></td>
                     <td th:text="${c.agendamento.horaAgendamento}"></td>
                     <td>
                         <a th:href="@{consulta/edit/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-primary">Reagendar</a>
                         <a th:href="@{consulta/delete/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
+						<a th:href="@{consulta/cancelarAgendamento/{id}(id=${c.agendamento.id})}" type="button" class="btn btn-outline btn-danger">Canc. Agendamento</a>
+                        
                     </td>
                   </tr>
             </tbody>
