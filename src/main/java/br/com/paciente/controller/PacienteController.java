@@ -30,7 +30,7 @@ import br.com.paciente.service.PacienteService;
 @RequestMapping("/paciente")
 public class PacienteController {
 
-	private static final String PAGES_NOVO_FUNCIONARIO = "pages/paciente/novo_paciente";
+	private static final String PAGES_NOVO_PACIENTE = "pages/paciente/novo_paciente";
 
 	private static final String PAGES_CONTATO_LISTAGEM = "pages/paciente/pacientes";
 
@@ -62,7 +62,7 @@ public class PacienteController {
 
 	@GetMapping("/novo")
 	public ModelAndView novo(Paciente paciente) {
-		ModelAndView mv = new ModelAndView(PAGES_NOVO_FUNCIONARIO);
+		ModelAndView mv = new ModelAndView(PAGES_NOVO_PACIENTE);
 		mv.addObject("paciente", paciente);
 		return mv;
 	}

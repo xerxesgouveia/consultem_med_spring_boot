@@ -13,9 +13,9 @@
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Cadastros<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                               <!--  <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Contatos</a>
-                                </li> -->
+								<li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/paciente}">Pacientes</a>
+                                </li> 
                                  <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/medico}">Medicos</a>
                                 </li>

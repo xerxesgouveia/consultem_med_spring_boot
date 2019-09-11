@@ -22,6 +22,8 @@ import br.com.consulta.dto.FiltroDataDto;
 import br.com.consulta.service.ConsultaService;
 import br.com.medico.Medico;
 import br.com.medico.service.MedicoService;
+import br.com.paciente.Paciente;
+import br.com.paciente.service.PacienteService;
 @Controller
 @RequestMapping("/consulta")
 public class ConsultaController {
@@ -35,6 +37,9 @@ public class ConsultaController {
 	
 	@Autowired
 	private MedicoService medicoService;
+	
+	@Autowired
+	private PacienteService pacienteService;
 
 	@GetMapping
 	public ModelAndView listar(@ModelAttribute("filtro") FiltroDataDto filtro) {
@@ -63,8 +68,11 @@ public class ConsultaController {
 	public ModelAndView novo(Consulta consulta) {
 		ModelAndView mv = new ModelAndView(PAGES_NOVO_CONSULTA);
 		List<Medico> medicos = this.medicoService.listar();
+		List<Paciente> pacientes = this.pacienteService.listar();
+		
+		mv.addObject("pacientes", pacientes);
 		mv.addObject("medicos", medicos);
-		mv.addObject("medico", consulta);
+		mv.addObject("consulta", consulta);
 		return mv;
 	}
 
