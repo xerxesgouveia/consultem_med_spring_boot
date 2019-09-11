@@ -20,22 +20,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.consulta.Consulta;
 import br.com.consulta.dto.FiltroDataDto;
 import br.com.consulta.service.ConsultaService;
+import br.com.medico.Medico;
+import br.com.medico.service.MedicoService;
 @Controller
 @RequestMapping("/consulta")
 public class ConsultaController {
 	
 	private static final String PAGES_NOVO_CONSULTA = "pages/consulta/nova_consulta";
 
-	private static final String PAGES_CONSULTA_LISTAGEM = "pages/medico/consultas";
+	private static final String PAGES_CONSULTA_LISTAGEM = "pages/consulta/consultas";
 
 	@Autowired
 	private ConsultaService consultaService;
+	
+	@Autowired
+	private MedicoService medicoService;
 
 	@GetMapping
 	public ModelAndView listar(@ModelAttribute("filtro") FiltroDataDto filtro) {
 		ModelAndView mv = new ModelAndView(PAGES_CONSULTA_LISTAGEM);
 		Optional<List<Consulta>> consultas = this.consultaService.filtroListagem(filtro.getDataAgendamento());
-		mv.addObject("medicos",consultas.get());
+		mv.addObject("consultas",consultas.get());
 
 		return mv; 
 	}
@@ -57,6 +62,8 @@ public class ConsultaController {
 	@GetMapping("/novo")
 	public ModelAndView novo(Consulta consulta) {
 		ModelAndView mv = new ModelAndView(PAGES_NOVO_CONSULTA);
+		List<Medico> medicos = this.medicoService.listar();
+		mv.addObject("medicos", medicos);
 		mv.addObject("medico", consulta);
 		return mv;
 	}

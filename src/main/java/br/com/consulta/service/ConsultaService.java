@@ -64,6 +64,8 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 		if (existeConsulta) {
 			return "Já existe uma consulta nesta data, no mesmo horario, com este médico";
 		}
+		
+		this.salvar(consulta);
 		return "";
 	}
 		
