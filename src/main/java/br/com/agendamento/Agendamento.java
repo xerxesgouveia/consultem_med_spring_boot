@@ -15,6 +15,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import br.com.paciente.Paciente;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,10 +32,8 @@ public class Agendamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@Column
-	private String nome;
-
 	@Column(name = "data_agendamento")
+    @DateTimeFormat(iso = ISO.DATE)
 	private LocalDate dataAgendamento;
 
 	@Column(name ="hora_agendamento")

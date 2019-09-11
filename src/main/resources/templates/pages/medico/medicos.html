@@ -9,13 +9,13 @@ layout:decorator="layoutPadrao">
 <div id="page-wrapper">
    <div class="row top-header">
        <div class="col-lg-12">
-           <h2 class="page-header">Funcionarios</h2>
+           <h2 class="page-header">Medicos</h2>
        </div>
    </div>
    
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item active">Funcionario</li>
+        <li class="breadcrumb-item active">Medico</li>
         
     </ol>
     
@@ -31,7 +31,7 @@ layout:decorator="layoutPadrao">
     
     <div class="conteiner">
         
-        <form method="GET" class="form-horizontal" action="/funcionario" th:object="${filtro}">
+        <form method="GET" class="form-horizontal" action="/medico" th:object="${filtro}">
                <div class="form-group">
                    <div class="col-sm-4">
                        <div class="input-group">
@@ -54,25 +54,27 @@ layout:decorator="layoutPadrao">
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Cargo</th>
-					<th>Setor</th>
-                    
+                    <th>Crm</th>
+                    <th>telefone</th>
+                    <th>email</th>
                     <th class="th-acoes">Ações</th>
                 </tr>
             </thead>
             <tbody >
-                  <tr th:each="f: ${funcionarios}">  
-                    <td th:text="${f.pessoa.nome}"></td>
-                    <td th:text="${f.cargo}"></td>
-                    <td th:text="${f.setor}"></td>
+                  <tr th:each="m: ${medicos}">  
+                    <td th:text="${m.pessoa.nome}"></td>
+                    <td th:text="${m.crm}"></td>
+                    <td th:text="${m.pessoa.telefone}"></td>
+					<td th:text="${m.pessoa.usuario.login}"></td>
+                    
                     <td>
-                        <a th:href="@{funcionario/edit/{id}(id=${f.id})}" type="button" class="btn btn-outline btn-primary">Editar</a>
-                        <a th:href="@{funcionario/delete/{id}(id=${f.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
+                        <a th:href="@{medico/edit/{id}(id=${m.id})}" type="button" class="btn btn-outline btn-primary">Editar</a>
+                        <a th:href="@{medico/delete/{id}(id=${m.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
                     </td>
                   </tr>
             </tbody>
         </table>
-        <a th:href="@{/funcionario/novo}" type="button" class="btn btn-outline btn-primary">Novo funcionario</a>
+        <a th:href="@{/medico/novo}" type="button" class="btn btn-outline btn-primary">Novo Medico</a>
     </div>
     
         

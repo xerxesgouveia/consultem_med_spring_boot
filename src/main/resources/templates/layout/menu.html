@@ -13,26 +13,26 @@
                         <li>
                             <a href="#"><i class="fa fa-edit fa-fw"></i> Cadastros<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
-                                <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Contatos</a>
-                                </li>
+								<li sec:authorize="hasAuthority('ADMIN')">
+                                    <a th:href="@{/paciente}">Pacientes</a>
+                                </li> 
                                  <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Agendamentos</a>
+                                    <a th:href="@{/medico}">Medicos</a>
+                                </li>
+                                <!-- sec:authorize="hasAuthority('ADMIN')" -->
+                                <li >
+                                    <a th:href="@{/funcionario}">Funcionarios</a>
                                 </li>
                                 
                                 <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Pacientes</a>
+                                    <a th:href="@{/consulta}">Agendar consulta</a>
                                 </li>
-                                
-                                <li sec:authorize="hasAuthority('ADMIN')">
-                                    <a th:href="@{/contatos}">Usuários</a>
-                                </li>
-                                <li sec:authorize="hasAuthority('ADMIN')">
+                               <!--  <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/outros/morris}">Morris</a>
                                 </li>
                                  <li sec:authorize="hasAuthority('ADMIN')">
                                     <a th:href="@{/outros/flot}">Float</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </li>
                         <li>
