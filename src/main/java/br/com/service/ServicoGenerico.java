@@ -23,7 +23,7 @@ public abstract class ServicoGenerico<T,ID extends Serializable> {
 		this.repository.save(entidade);
 	}
 	
-	@Transactional(readOnly=true)
+	@Transactional()
 	public void remover(final ID id) {
 		this.repository.delete(id);
 	}

@@ -15,7 +15,6 @@ import br.com.funcionario.Funcionario;
 import br.com.funcionario.infraestructure.FuncionarioRepository;
 import br.com.infraestructure.GenericRepository;
 import br.com.service.ServicoGenerico;
-import br.com.usuario.Usuario;
 import br.com.usuario.service.UsuarioService;
 
 @Service
