@@ -3,11 +3,10 @@
  */
 package br.com.usuario.service;
 
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -25,7 +24,8 @@ public class UsuarioService extends ServicoGenerico<Usuario, Long> {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
-    @Autowired private JavaMailSender mailSender;
+    @Autowired 
+    private JavaMailSender mailSender;
 
 	@Transactional
 	public boolean verificarExistenciaLogin(final String login, final String loginAntigo) {
@@ -64,9 +64,9 @@ public class UsuarioService extends ServicoGenerico<Usuario, Long> {
         message.setSubject("Agendamento consulta");
         message.setText("Sua consulta foi agendada para a data "+ agendamento.getDataAgendamento() + " as : " + agendamento.getHoraAgendamento() );
         message.setSentDate(new Date());
-        message.setTo("edmar1soares@gmail.com");
-        message.setFrom(emailPaciente);
-
+        message.setTo(emailPaciente); 
+        message.setFrom("edmar1soares@gmail.com");
+        
         try {
             mailSender.send(message);
             return "Email enviado com sucesso!";
