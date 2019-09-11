@@ -69,7 +69,7 @@ layout:decorator="layoutPadrao">
  -->                    <td th:text="${c.agendamento.dataAgendamento}"></td>
                     <td th:text="${c.agendamento.horaAgendamento}"></td>
                     <td>
-                        <a th:href="@{consulta/edit/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-primary">Editar</a>
+                        <a th:href="@{consulta/edit/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-primary">Reagendar</a>
                         <a th:href="@{consulta/delete/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
                     </td>
                   </tr>

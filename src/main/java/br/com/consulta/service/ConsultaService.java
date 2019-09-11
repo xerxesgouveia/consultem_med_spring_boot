@@ -19,7 +19,7 @@ import br.com.service.ServicoGenerico;
 
 @Service
 public class ConsultaService extends ServicoGenerico<Consulta, Long> {
-	
+
 	@Autowired
 	private ConsultaRepository consultaRepository;
 
@@ -28,14 +28,15 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 		// TODO Auto-generated method stub
 		return this.consultaRepository;
 	}
-	
+
 	@Transactional(readOnly = true)
-	public boolean existeConsultaComHoraEData(final LocalDate dataAgendamento, final LocalTime hora, final Long idMedico) {
+	public boolean existeConsultaComHoraEData(final LocalDate dataAgendamento, final LocalTime hora,
+			final Long idMedico) {
 		boolean existeConsulta = this.consultaRepository.existeConsultaComHoraEData(dataAgendamento, hora, idMedico);
-		
+
 		return existeConsulta;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Optional<List<Consulta>> filtroListagem(final LocalDate filtro) {
 
@@ -43,30 +44,35 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 			List<Consulta> ConsultasFiltradas = this.consultaRepository.buscarPorDataAgendamento(filtro);
 			return Optional.ofNullable(ConsultasFiltradas);
 		}
-		List<Consulta>  consultas = this.consultaRepository.findAll();
-		
+		List<Consulta> consultas = this.consultaRepository.findAll();
+
 		return Optional.ofNullable(consultas);
 
 	}
 
 	@Transactional
 	public String salvarConsulta(final Consulta consulta) {
-		
-		consulta.getAgendamento().setStatus(StatusAgendamento.AGENDADO);
-		
+
+		if (consulta.getId() != null) {
+			consulta.getAgendamento().setStatus(StatusAgendamento.REAGENDADO);
+
+		} else {
+			consulta.getAgendamento().setStatus(StatusAgendamento.AGENDADO);
+
+		}
+
 		final LocalDate dataAgendamento = consulta.getAgendamento().getDataAgendamento();
 		final LocalTime hora = consulta.getAgendamento().getHoraAgendamento();
 		final Long idMedico = consulta.getMedico().getId();
-		
-		
+
 		final boolean existeConsulta = this.existeConsultaComHoraEData(dataAgendamento, hora, idMedico);
-		
+
 		if (existeConsulta) {
 			return "Já existe uma consulta nesta data, no mesmo horario, com este médico";
 		}
-		
+
 		this.salvar(consulta);
 		return "";
 	}
-		
+
 }
