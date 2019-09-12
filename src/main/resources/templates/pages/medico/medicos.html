@@ -70,6 +70,8 @@ layout:decorator="layoutPadrao">
                     <td>
                         <a th:href="@{medico/edit/{id}(id=${m.id})}" type="button" class="btn btn-outline btn-primary">Editar</a>
                         <a th:href="@{medico/delete/{id}(id=${m.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
+                        <a th:href="@{medico/filtro/{id}(id=${m.id})}" type="button" class="btn btn-outline btn-danger">Filtrar Consultas</a>
+                        
                     </td>
                   </tr>
             </tbody>

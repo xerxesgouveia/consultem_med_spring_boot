@@ -1,5 +1,6 @@
 package br.com.medico.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.consulta.Consulta;
+import br.com.consulta.service.ConsultaService;
 import br.com.medico.Medico;
 import br.com.medico.dto.MedicoFiltroDTO;
 import br.com.medico.service.MedicoService;
@@ -27,9 +30,15 @@ public class MedicoController {
 	private static final String PAGES_NOVO_MEDICO = "pages/medico/novo_medico";
 
 	private static final String PAGES_MEDICO_LISTAGEM = "pages/medico/medicos";
+	
+	private static final String PAGES_MEDICO_LISTAGEM_FILTRO = "pages/medico/medico_filtro";
+
 
 	@Autowired
 	private MedicoService medicoService;
+	
+	@Autowired
+	private ConsultaService consultaService;
 
 	@GetMapping
 	public ModelAndView listar(@ModelAttribute("filtro") MedicoFiltroDTO filtro) {
@@ -79,5 +88,12 @@ public class MedicoController {
 		attributes.addFlashAttribute("mensagemErro", mensagemusuario);
 
 		return new ModelAndView("redirect:/medico/novo");
+	}
+	@GetMapping("/filtro/{id}")
+	public ModelAndView filtrarConsultaPorMedicoComData(@PathVariable final Long id){
+		ModelAndView mv = new ModelAndView(PAGES_MEDICO_LISTAGEM_FILTRO);
+		List<Consulta> consultasFiltradas = this.consultaService.filtrarConsultaPorMedicoComData(id);
+		mv.addObject("consultas", consultasFiltradas);
+		return mv;
 	}
 }

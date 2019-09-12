@@ -24,4 +24,7 @@ public interface ConsultaRepository extends GenericRepository<Consulta, Long>{
 	@Query("SELECT c FROM Consulta c INNER JOIN c.agendamento as agen WHERE " + 
 			" agen.dataAgendamento = :agendamento")
 	List<Consulta> buscarPorDataAgendamento( @Param("agendamento") final LocalDate dataAgendamento);
+	
+	@Query("SELECT c FROM Consulta c JOIN c.medico as m WHERE m.id = :id")
+	List<Consulta> filtrarConsultaPorMedicoComData(@Param("id") final Long id);
 }
