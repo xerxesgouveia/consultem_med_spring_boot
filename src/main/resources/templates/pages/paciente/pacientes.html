@@ -55,8 +55,7 @@ layout:decorator="layoutPadrao">
                 <tr>
                     <th>Nome</th>
                     <th>Prontuário</th>
-	
-                    
+                    <th>CPF</th>
                     <th class="th-acoes">Ações</th>
                 </tr>
             </thead>
@@ -64,7 +63,8 @@ layout:decorator="layoutPadrao">
                   <tr th:each="f: ${pacientes}">  
                     <td th:text="${f.pessoa.nome}"></td>
                     <td th:text="${f.prontuario}"></td>
-            
+                    <td th:text="${f.pessoa.cpf}"></td>
+                    
                     <td>
                         <a th:href="@{paciente/edit/{id}(id=${f.id})}" type="button" class="btn btn-outline btn-primary">Editar</a>
                         <a th:href="@{paciente/delete/{id}(id=${f.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
