@@ -47,11 +47,11 @@ public class ConsultaController {
 
 	@GetMapping("/cancelarAgendamento/{id}")
 	public ModelAndView cancelarConsulta(@PathVariable Long id, RedirectAttributes attributes ) {
-		ModelAndView mv = new ModelAndView(PAGES_CONSULTA_LISTAGEM);
+		ModelAndView mv = new ModelAndView("redirect:/consulta");
 		final String mensagemCancelamento = this.agendamentoService.cancelarAgendamento(id);
 		mv.addObject("mensagem",mensagemCancelamento);
 
-		return listar(new FiltroDataDto());
+		return mv;
 	}
 	
 	@GetMapping()
