@@ -48,7 +48,7 @@
         
         <div class="form-group" th:classappend="${#fields.hasErrors('agendamento.horaAgendamento')}? 'has-error'">
             <label>Hora do agendamento</label> 
-            <input id="horaAgendamento" class="form-control" type="datetime" name="horaAgendamento"  th:field="*{agendamento.horaAgendamento}"/>
+            <input id="horaAgendamento" class="form-control" type="time" maxlength="8" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  name="horaAgendamento"  th:field="*{agendamento.horaAgendamento}"/>
         </div>
         <div class="form-group" th:classappend="${#fields.hasErrors('medico')}? 'has-error'">
             <label for="medico">Médicos disponíveis</label> 
