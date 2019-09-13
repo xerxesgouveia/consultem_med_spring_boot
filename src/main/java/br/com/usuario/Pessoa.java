@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -26,9 +28,14 @@ public class Pessoa implements Serializable {
 	@Column
 	@Length(min=3, max=20, message="O nome não pode ser vazio")
 	private String nome;
+	
 	@Column
 	private String telefone;
 	
+	@Column
+	@CPF(message = "Entre um CPF valido!")
+	private String cpf;
+		
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="id_usuario")
 	@NotNull
