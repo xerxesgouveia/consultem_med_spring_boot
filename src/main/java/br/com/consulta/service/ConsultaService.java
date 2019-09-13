@@ -95,5 +95,10 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 		
 		return "Consulta cancelada";
 	}
+	
+	@Transactional(readOnly=true)
+	public List<Consulta> filtrarConsultaPorMedicoComData(final Long idMedico){
+		return this.consultaRepository.filtrarConsultaPorMedicoComData(idMedico);
+	}
 
 }

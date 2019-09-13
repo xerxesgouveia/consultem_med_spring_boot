@@ -10,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -31,9 +34,14 @@ public class Usuario implements Serializable{
 	private Long id;
 	
 	@Column()
+	@Length(min=10, max=20, message="O nome não pode ser vazio")
+	private String nome;
+	
+	@Length(min=8, max=50, message="O Email de acesso não pode ser vazio")
 	private String login;
 	
 	@Column()
+	@NotBlank(message = "A senha não pode ser vazia")
 	private String senha;
 	
 //	@Enumerated(EnumType.STRING)

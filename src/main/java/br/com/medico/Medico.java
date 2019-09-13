@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.usuario.Pessoa;
 import lombok.Data;
@@ -33,11 +36,12 @@ public class Medico implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	
 	@Column(name = "CRM")
+	@NotBlank(message = "O crm pode ser vazio")
 	private String crm;
 	
 	@Embedded
+	@Valid
 	private Pessoa pessoa;
 
 }

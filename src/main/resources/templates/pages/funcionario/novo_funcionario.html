@@ -30,20 +30,20 @@
             <input id="id" type="hidden" class="form-control" th:field="*{id}" />
             <div class="form-group">
                 <div class="alert alert-danger" th:if="${#fields.hasAnyErrors()}">
-	            <div th:each="detailedError : ${#fields.detailedErrors()}">
+	            	<div th:each="detailedError : ${#fields.detailedErrors()}">
 		                <span th:text="${detailedError.message}"></span>
 		            </div>
 		        </div>
 		    </div> 
 		
-		<div class="form-group" >
+		<div class="form-group" th:classappend="${#fields.hasErrors('pessoa.nome')}? 'has-error'">
 			<label>Nome</label> 
-			<input id="nome" class="form-control" type="text" name="nome"  th:field="*{pessoa.nome}" required="true"/>
+			<input id="nome" class="form-control" type="text" name="nome"   th:field="*{pessoa.nome}" />
         </div>
         
         <div class="form-group" th:classappend="${#fields.hasErrors('cargo')}? 'has-error'">
             <label>Cargo</label> 
-            <input id="cargo" class="form-control" type="text" name="cargo"  th:field="*{cargo}" required="true"/>
+            <input id="cargo" class="form-control" type="text" name="cargo"  th:field="*{cargo}" />
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('setor')}? 'has-error'">
@@ -51,26 +51,26 @@
             <input id="setor" class="form-control" type="text" name="setor"  th:field="*{setor}"/>
         </div>
         
-        <div class="form-group" th:classappend="${#fields.hasErrors('pessoa.telefone')}? 'has-error'">
+        <div class="form-group" >
             <label>telefone</label> 
             <input id="telefone" class="form-control" type="text" name="telefone"  th:field="*{pessoa.telefone}"/>
         </div>
             
 		<div class="form-group" th:classappend="${#fields.hasErrors('pessoa.usuario.login')}? 'has-error'">
 			<label>Login sistema</label> 
-			<input class="form-control" type="text" name="login"  th:field="*{pessoa.usuario.login}" required="true"/>
+			<input class="form-control" type="text" name="login"  th:field="*{pessoa.usuario.login}" />
         </div>
         <input id="id" type="hidden" class="form-control" th:field="*{pessoa.usuario.id}" />
         
         <div class="form-group" th:classappend="${#fields.hasErrors('pessoa.usuario.senha')}? 'has-error'">
             <label>Senha</label> 
-            <input id="Senha" class="form-control" type="password" name="senha"  th:field="*{pessoa.usuario.senha}" required="true"/>
+            <input id="Senha" class="form-control" type="password" name="senha"  th:field="*{pessoa.usuario.senha}" />
         </div>
             
 		
 		<div class="form-group">
 			<button type="submit" class="btn btn-outline btn-primary">Salvar</button>
-			<a th:href="@{/funcionario}" type="button" class="btn btn-outline btn-success">Funcionarios</a>
+			<a th:href="@{/funcionario}" type="button" class="btn btn-outline btn-success">Funcionários</a>
 		</div>
 		</form>
 	</div>

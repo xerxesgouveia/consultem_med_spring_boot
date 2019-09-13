@@ -3,6 +3,7 @@
  */
 package br.com.medico.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
+import br.com.consulta.Consulta;
+import br.com.consulta.service.ConsultaService;
 import br.com.infraestructure.GenericRepository;
 import br.com.medico.Medico;
 import br.com.medico.infraestructure.MedicoRepository;
@@ -25,7 +28,7 @@ public class MedicoService extends ServicoGenerico<Medico, Long> {
 	
 	@Autowired
 	private UsuarioService usuarioService;
-
+	
 	@Override
 	public GenericRepository<Medico, Long> getRepository() {
 		// TODO Auto-generated method stub
@@ -56,5 +59,5 @@ public class MedicoService extends ServicoGenerico<Medico, Long> {
 		
 		return mensagemUsuario;
 	}
-
+	
 }
