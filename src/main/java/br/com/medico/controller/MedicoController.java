@@ -3,6 +3,8 @@ package br.com.medico.controller;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -93,6 +95,7 @@ public class MedicoController {
 	public ModelAndView filtrarConsultaPorMedicoComData(@PathVariable final Long id){
 		ModelAndView mv = new ModelAndView(PAGES_MEDICO_LISTAGEM_FILTRO);
 		List<Consulta> consultasFiltradas = this.consultaService.filtrarConsultaPorMedicoComData(id);
+		
 		mv.addObject("consultas", consultasFiltradas);
 		return mv;
 	}
