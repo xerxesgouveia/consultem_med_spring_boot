@@ -33,7 +33,7 @@ public class Pessoa implements Serializable {
 	private String telefone;
 	
 	@Column
-	@CPF(message = "Entre um CPF valido!")
+	@CPF(message = "Entre com um CPF valido!")
 	private String cpf;
 		
 	@OneToOne(cascade=CascadeType.ALL)

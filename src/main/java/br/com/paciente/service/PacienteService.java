@@ -46,8 +46,6 @@ public class PacienteService extends ServicoGenerico<Paciente, Long> {
 	@Transactional(readOnly = true)
 	public Optional<List<Paciente>> filtroListagem(final String filtro) {
 		
-
-
 		if (!StringUtils.isEmpty(filtro)) {
 			List<Paciente> pacientesFiltrados = this.pacienteRepository.findByPessoaNomeContaining(filtro);
 			return Optional.ofNullable(pacientesFiltrados);
@@ -62,13 +60,13 @@ public class PacienteService extends ServicoGenerico<Paciente, Long> {
 	public String salvarPaciente(Paciente paciente) {
 		
 		String mensagemUsuario = this.usuarioService.prepararParaPersistir(paciente.getPessoa().getUsuario());
-		String existeCpf = this.pacienteRepository.verificarExistenciaCpf(paciente.getPessoa().getCpf()) ? "usuário já existe com este cpf cadastrado" : "";
+		boolean existeCpf = this.pacienteRepository.verificarExistenciaCpf(paciente.getPessoa().getCpf());
 		
-		if (mensagemUsuario.equals("") && existeCpf.equals("")) { 
+		if (existeCpf) { 
 			this.pacienteRepository.save(paciente);
-			return "";
+			return "Já existe um cpf cadastrado no sistema";
 		}
 		
-		return mensagemUsuario + existeCpf;
+		return mensagemUsuario ;
 	}
 }

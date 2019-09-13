@@ -39,7 +39,7 @@ public class Agendamento implements Serializable {
 	@Column(name ="hora_agendamento")
 	private LocalTime horaAgendamento;
 
-	@OneToOne
+	@OneToOne()
 	@JoinColumn(name = "id_paciente")
 	private Paciente paciente;
 

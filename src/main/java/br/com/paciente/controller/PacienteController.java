@@ -68,7 +68,7 @@ public class PacienteController {
 	}
 
 	@PostMapping("/save")
-	public ModelAndView salvar(@Valid Paciente paciente, Model model, BindingResult result,
+	public ModelAndView salvar(@Valid Paciente paciente, BindingResult result ,Model model,
 			RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/paciente");
 
