@@ -36,14 +36,14 @@
 		        </div>
 		    </div> 
 		
-		<div class="form-group" >
+		<div class="form-group" th:classappend="${#fields.hasErrors('pessoa.nome')}? 'has-error'" >
 			<label>Nome</label> 
-			<input id="nome" class="form-control" type="text" name="nome"  th:field="*{pessoa.nome}" required="true"/>
+			<input id="nome" class="form-control" type="text" name="nome"  th:field="*{pessoa.nome}" />
         </div>
         
         <div class="form-group" th:classappend="${#fields.hasErrors('crm')}? 'has-error'">
             <label>Crm</label> 
-            <input id="crm" class="form-control" type="text" name="crm"  th:field="*{crm}" required="true"/>
+            <input id="crm" class="form-control" type="text" name="crm"  th:field="*{crm}" />
         </div>
 
         <div class="form-group" th:classappend="${#fields.hasErrors('pessoa.telefone')}? 'has-error'">
@@ -60,7 +60,7 @@
         
         <div class="form-group" th:classappend="${#fields.hasErrors('pessoa.usuario.senha')}? 'has-error'">
             <label>Senha</label> 
-            <input id="Senha" class="form-control" type="password" name="senha"  th:field="*{pessoa.usuario.senha}" required="true"/>
+            <input id="Senha" class="form-control" type="password" name="senha"  th:field="*{pessoa.usuario.senha}" />
         </div>
             
 		

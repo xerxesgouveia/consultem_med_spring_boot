@@ -71,7 +71,7 @@ layout:decorator="layoutPadrao">
                     <td>
                         <a th:href="@{consulta/edit/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-primary">Reagendar</a>
                         <a th:href="@{consulta/delete/{id}(id=${c.id})}" type="button" class="btn btn-outline btn-danger">Excluir</a>
-						<a th:href="@{consulta/cancelarAgendamento/{id}(id=${c.agendamento.id})}" type="button" class="btn btn-outline btn-danger">Canc. Agendamento</a>
+						<a th:href="@{consulta/cancelarAgendamento/{id}(id=${c.agendamento.id})}" type="button" class="btn btn-outline btn-primary">Canc. Agendamento</a>
                         
                     </td>
                   </tr>

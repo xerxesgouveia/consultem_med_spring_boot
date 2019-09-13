@@ -73,7 +73,7 @@ public class MedicoController {
 	}
 
 	@PostMapping("/save")
-	public ModelAndView salvar(@Valid Medico medico, Model model, BindingResult result,
+	public ModelAndView salvar(@Valid Medico medico, BindingResult result, Model model,
 			RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/medico");
 
