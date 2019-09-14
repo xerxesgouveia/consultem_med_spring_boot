@@ -27,4 +27,10 @@ public interface ConsultaRepository extends GenericRepository<Consulta, Long>{
 	
 	@Query("SELECT c FROM Consulta c JOIN c.medico as m WHERE m.id = :id")
 	List<Consulta> filtrarConsultaPorMedicoComData(@Param("id") final Long id);
+	
+
+	@Query("select case when (count(con) > 0) then true else false end from Consulta con"
+			+ " inner join con.agendamento.paciente as p where  p.id = :id")
+	boolean existePacienteVinculadoAconsulta(@Param("id") final Long idPaciente);
+	
 }

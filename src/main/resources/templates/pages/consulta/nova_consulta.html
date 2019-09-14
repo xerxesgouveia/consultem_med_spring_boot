@@ -54,8 +54,8 @@
             <label for="medico">Médicos disponíveis</label> 
                 <select name="medico" th:field="*{medico}" class="form-control" >
                     <option th:each="m: ${medicos}" 
-                            th:value="${m.id}" th:text="${m.pessoa.nome}"></option>                                                             
-            </select>
+                     th:value="${m.id}" th:text="${m.pessoa.nome}"></option>                                                             
+            	</select>
         </div>  
         
          <div class="form-group" th:classappend="${#fields.hasErrors('agendamento.paciente')}? 'has-error'">

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
+import br.com.consulta.service.ConsultaService;
 import br.com.infraestructure.GenericRepository;
 import br.com.paciente.Paciente;
 import br.com.paciente.infraestructure.PacienteRepository;
@@ -30,6 +31,9 @@ public class PacienteService extends ServicoGenerico<Paciente, Long> {
 
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ConsultaService consultaService;
 
 	@Override
 	public GenericRepository<Paciente, Long> getRepository() {
@@ -63,10 +67,24 @@ public class PacienteService extends ServicoGenerico<Paciente, Long> {
 		boolean existeCpf = this.pacienteRepository.verificarExistenciaCpf(paciente.getPessoa().getCpf());
 		
 		if (existeCpf) { 
-			this.pacienteRepository.save(paciente);
 			return "Já existe um cpf cadastrado no sistema";
 		}
 		
+		this.pacienteRepository.save(paciente);
+		
 		return mensagemUsuario ;
+	}
+	
+	@Transactional()
+	public String excluirPaciente(final Long id) {
+		
+		final boolean existePacienteVinculadoAconsulta = this.consultaService.existePacienteVinculadoAconsulta(id);
+		
+		if (existePacienteVinculadoAconsulta) {
+			return "Este paciente não pode ser excluído porque está vinculado a uma consulta";
+		}
+		
+		this.remover(id);
+		return "Paciente excluído com sucesso!";
 	}
 }

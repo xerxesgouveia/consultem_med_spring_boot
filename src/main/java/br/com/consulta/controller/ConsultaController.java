@@ -90,7 +90,7 @@ public class ConsultaController {
 	}
 
 	@PostMapping("/save")
-	public ModelAndView salvar(@Valid Consulta consulta, Model model, BindingResult result,
+	public ModelAndView salvar(@Valid Consulta consulta, BindingResult result,Model model, 
 			RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/consulta");
 
