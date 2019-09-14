@@ -100,8 +100,12 @@ public class ConsultaService extends ServicoGenerico<Consulta, Long> {
 	public boolean existePacienteVinculadoAconsulta(final Long idPaciente) {
 		return this.consultaRepository.existePacienteVinculadoAconsulta(idPaciente);
 	}
-
 	
+	@Transactional(readOnly = true)
+	public boolean existeMedicoVinculadoAconsulta(final Long idMedico) {
+		return this.consultaRepository.existeMedicoVinculadoAconsulta(idMedico);
+	}
+
 	@Transactional(readOnly=true)
 	public List<Consulta> filtrarConsultaPorMedicoComData(final Long idMedico){
 		return this.consultaRepository.filtrarConsultaPorMedicoComData(idMedico);

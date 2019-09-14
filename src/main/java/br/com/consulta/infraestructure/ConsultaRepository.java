@@ -33,4 +33,8 @@ public interface ConsultaRepository extends GenericRepository<Consulta, Long>{
 			+ " inner join con.agendamento.paciente as p where  p.id = :id")
 	boolean existePacienteVinculadoAconsulta(@Param("id") final Long idPaciente);
 	
+	@Query("select case when (count(con) > 0) then true else false end from Consulta con"
+			+ " inner join con.medico as m where  m.id = :id")
+	boolean existeMedicoVinculadoAconsulta(@Param("id") final Long idMedico);
+	
 }

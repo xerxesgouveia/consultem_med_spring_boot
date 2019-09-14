@@ -3,7 +3,6 @@
  */
 package br.com.medico.service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.thymeleaf.util.StringUtils;
 
-import br.com.consulta.Consulta;
 import br.com.consulta.service.ConsultaService;
 import br.com.infraestructure.GenericRepository;
 import br.com.medico.Medico;
@@ -28,6 +26,9 @@ public class MedicoService extends ServicoGenerico<Medico, Long> {
 	
 	@Autowired
 	private UsuarioService usuarioService;
+	
+	@Autowired
+	private ConsultaService consultaService;
 	
 	@Override
 	public GenericRepository<Medico, Long> getRepository() {
@@ -58,6 +59,20 @@ public class MedicoService extends ServicoGenerico<Medico, Long> {
 		}
 		
 		return mensagemUsuario;
+	}
+	
+
+	@Transactional()
+	public String excluirMedico(final Long id) {
+		
+		final boolean existePacienteVinculadoAconsulta = this.consultaService.existeMedicoVinculadoAconsulta(id);
+		
+		if (existePacienteVinculadoAconsulta) {
+			return "Este médico não pode ser excluído porque está vinculado a uma consulta";
+		}
+		
+		this.remover(id);
+		return "Médico excluído com sucesso!";
 	}
 	
 }

@@ -54,8 +54,8 @@ public class MedicoController {
 	@GetMapping("/delete/{id}")
 	public ModelAndView excluir(@PathVariable Long id, RedirectAttributes attributes) {
 		ModelAndView mv = new ModelAndView("redirect:/medico");
-		this.medicoService.remover(id);
-		attributes.addFlashAttribute("removido", "Medico removido com sucesso!");
+		String mensagemRemocao = this.medicoService.excluirMedico(id);
+		attributes.addFlashAttribute("removido", mensagemRemocao);
 		return mv;
 	}
 
